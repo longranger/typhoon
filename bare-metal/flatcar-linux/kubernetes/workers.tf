@@ -22,11 +22,11 @@ module "workers" {
   node_labels           = lookup(var.worker_node_labels, var.workers[count.index].name, [])
   node_taints           = lookup(var.worker_node_taints, var.workers[count.index].name, [])
   snippets              = lookup(var.snippets, var.workers[count.index].name, [])
+  install_disk          = lookup(var.custom_install_disks, var.workers[count.index].name, var.install_disk)
 
   # optional
   download_protocol = var.download_protocol
   cached_install    = var.cached_install
-  install_disk      = var.install_disk
   kernel_args       = var.kernel_args
 }
 

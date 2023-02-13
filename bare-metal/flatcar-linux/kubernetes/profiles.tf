@@ -53,7 +53,7 @@ data "ct_config" "install" {
     os_version         = var.os_version
     ignition_endpoint  = format("%s/ignition", var.matchbox_http_endpoint)
     mac                = concat(var.controllers.*.mac, var.workers.*.mac)[count.index]
-    install_disk       = var.install_disk
+    install_disk       = lookup(var.custom_install_disks, var.controllers[count.index].name, var.install_disk)
     ssh_authorized_key = var.ssh_authorized_key
     # only cached profile adds -b baseurl
     baseurl_flag = var.cached_install ? "-b ${var.matchbox_http_endpoint}/assets/flatcar" : ""

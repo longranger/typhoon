@@ -137,6 +137,12 @@ variable "install_disk" {
   description = "Disk device to which the install profiles should install Flatcar Linux (e.g. /dev/sda)"
 }
 
+variable "custom_install_disks" {
+  type        = map(string)
+  description = "Map from machine names to install disk to override var.install_disk (e.g. /dev/sdb)"
+  default     = {}
+}
+
 variable "kernel_args" {
   type        = list(string)
   description = "Additional kernel arguments to provide at PXE boot."
